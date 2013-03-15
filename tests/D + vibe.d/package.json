@@ -1,0 +1,5 @@
+﻿{
+	"name": "vibe.d-perf",
+	"description": "Minimal HTTP server for performance tests",
+	"authors": [ "Михаил Страшун" ],
+}
