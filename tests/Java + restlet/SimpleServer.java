@@ -6,7 +6,7 @@ import org.restlet.resource.ServerResource;
  
  public class SimpleServer extends Application {
      public static void main(String[] args) throws Exception {
-         new Server(Protocol.HTTP, 8111, GreetingResource.class).start();
+         new Server(Protocol.HTTP, 8080, GreetingResource.class).start();
      }
 
      public static class GreetingResource extends ServerResource {
