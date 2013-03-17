@@ -5,6 +5,4 @@ http.createServer(function (req, res) {
       res.writeHead(200, {'Content-Type': 'text/plain'});
       var query = url.parse(req.url, true).query;
       res.end("Hello, " + query["name"]);
-}).listen(8080, '127.0.0.1');
-
-console.log('Server running at http://127.0.0.1:1337/');
+}).listen(8080, '0.0.0.0');

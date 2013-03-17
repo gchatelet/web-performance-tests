@@ -9,10 +9,7 @@ void handleRequest(HttpServerRequest req, HttpServerResponse res)
 
 shared static this()
 {
-    version(Debug)
-    {
-        logInfo("Debug");
-    }
+    setLogLevel(LogLevel.Error);
 
 	auto settings = new HttpServerSettings;
 	settings.port = 8080;
