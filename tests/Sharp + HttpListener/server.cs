@@ -15,7 +15,7 @@ class Server
             HttpListenerRequest request = context.Request;
             HttpListenerResponse response = context.Response;
 
-            string responseString = "Hello, " + "???";
+            string responseString = "Hello, " + request.QueryString["name"];
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
 
             response.ContentLength64 = buffer.Length;
