@@ -9,15 +9,15 @@ init(_TcpHttp, Req, _Args) -> {ok, Req, undefined}.
 
 handle(Req, _State) ->
   {Meth, Req1} = cowboy_req:method(Req),
-  {ok, element(2, response_maybe(Meth, Req1)), undefined}.
+  {Name, Req2} = cowboy_req:qs_val(<<"name">>, Req1),
+  {ok, element(2, response_maybe(Meth, Name, Req2)), undefined}.
 
 terminate(_,_,_) -> ok.
 
-response_maybe(<<"GET">>, Req) ->
-  {Name, Req1} = cowboy_req:qs_val(<<"name">>, Req),
-  cowboy_req:reply(200, [], <<"Hello, ", Name/binary>>, Req1);
+response_maybe(<<"GET">>, Name, Req) when is_binary(Name) ->
+  cowboy_req:reply(200, [], <<"Hello, ", Name/binary>>, Req);
 
-response_maybe(_, Req) ->
+response_maybe(_, _, Req) ->
   cowboy_req:reply(501, [], not_implemented(), Req).
 
 not_implemented() -> <<"<!doctype html>
@@ -26,6 +26,6 @@ not_implemented() -> <<"<!doctype html>
       <title>Web Performance Tests :: 501</title>
     </head>
     <body>
-      <h1>501</h1> I'm just sitting watching the wheels go round and round.
+      <h1>501</h1> I'm just sitting here watching the wheels go round and round.
     </body>
   </html>">>.
