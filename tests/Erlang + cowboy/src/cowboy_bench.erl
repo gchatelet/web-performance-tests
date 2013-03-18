@@ -8,10 +8,17 @@
 init(_TcpHttp, Req, _Args) -> {ok, Req, undefined}.
 
 handle(Req, _State) ->
-  {ok, Req1} = cowboy_req:reply(501, [], not_implemented(), Req),
-  {ok, Req1, undefined}.
+  {Meth, Req1} = cowboy_req:method(Req),
+  {ok, element(2, response_maybe(Meth, Req1)), undefined}.
 
 terminate(_,_,_) -> ok.
+
+response_maybe(<<"GET">>, Req) ->
+  {Name, Req1} = cowboy_req:qs_val(<<"name">>, Req),
+  cowboy_req:reply(200, [], <<"Hello, ", Name/binary>>, Req1);
+
+response_maybe(_, Req) ->
+  cowboy_req:reply(501, [], not_implemented(), Req).
 
 not_implemented() -> <<"<!doctype html>
   <html>
