@@ -1,0 +1,3 @@
+Server: Core i5 2500k, 8GB RAM, latest Arch Linux with no custom tuning
+Client: Acer Aspire4752Z. same Arch Linux
+Network: stock network cards, connected directly via D-Link DES-1008P switch
